@@ -1,0 +1,32 @@
+"Kernel" is the core part of the OS that always stays in memory, it never changes.
+
+"Filesystem" is the format that storage devices can store data in. Ex: Windows (NTFS, FAT, FAT16, or FAT32), MAC (HFS)
+
+"Group" is a collection of users that can view or modify or run files belonging to that group.
+
+"User" is given a User ID number (or UID) to distinguish file permissions.
+
+"System User" is given a User ID number (or UID) between pre-defined SYS_UID_MIN and SYS_UID_MAX range in /etc/login.defs, and these UIDs have higher permission to system files than normal users. Most Linux distributions come with a "root" system user.
+
+"Normal User"is given a User ID number (or UID) between pre-defined UID_MIN and UID_MAX range in /etc/login.defs
+
+"/etc" The etc folder (short for etcetera) is a commonplace location to store system files that are used by your operating system. Examples of important files are passwd, shadow, sudoers, sudoers.d
+
+"/var" folder (short for variable data) is used to store data that is frequently accessed or written by services or applications running on the system or other data that is not necessarily associated with a specific user.
+
+"/root" is the home directory of the root user.
+
+"/tmp" folder is volatile and used to store data that is only needed to be accessed once or twice. The contents of this folder are cleared out once the computer is restarted. For penetesting, one can store their enumerations scripts here as they will be deleted once the machine is restarted.
+
+"Processes" are the programs/scripts that are running on your machine. Theya re managed by the kernel and each process is given an ID known as its PID. PID also represent the order in which a process started, so the 60th process will have a PID of 60. One can view processes with the "ps" command. Each PID belongs to a process group ID (or PGID).
+
+"Session" refers to a shell session, like bash, which is launched every time you open a new terminal. A session is created by a user to interact with a kernel. It can be thought of as a grouping of processes by the user running those processes. One user can run multiple sessions if they have multiple terminals open. Each Session is given an SID.
+
+"Session Leader" is the process that is running a shell or session for that user, and all other processes running in that shell is a child of the Session Leader. Pressing "x" button on a terminal does not take you out of a session, as the terminal will continue running in background, one must logout of a session by typing CTRL+D or "exit" to terminate the session leader. The kernel does this by sending a SIGHUP signal (similar to "kill -1") to the Session Leader, and Session Leader recursively sends SIGHUP to each child process. Some of these child processes can chose not to terminate (those suspended or running in background) and they become orphaned and adoped by "init process". Session Leader will have PGIDs that are the same as their PID, and all child processes witll belong to that PGID.
+
+"Init Process" this is the second of 6 processes that initiate a linux machine. It runs after "The Scheduler" process.
+
+"The Scheduler" is the first process that initiates a linux machine.
+
+"bash" is a common type of shell session in Linux.
+
